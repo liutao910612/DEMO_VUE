@@ -22,20 +22,40 @@
 
 <body>
     <div id="vm1">
-        <!-- <div v-bind:class="{active : isActive,'text-danger' : hasError}"></div> -->
-        <div v-bind:class="{classObject}"></div>
+        <div v-bind:class="{active : isActive,'text-danger' : hasError}"></div>
+        <br />
+        <div v-bind:class="classObject"></div>
+        <br />
+        <div v-bind:class="classObject2"></div>
     </div>
     <script>
         var vm1 = new Vue({
             el: "#vm1",
             data: {
-                // isActive: true,
-                // hasError: true,
+                isActive: true,
+                hasError: true,
+
+                //直接将数据绑定在对象里
                 classObject: {
                     active: true,
                     'text-danger': true
+                },
+
+                //绑定返回对象的计算属性
+                error: {
+                    value: true,
+                    type: 'fatal'
+                }
+            },
+            computed: {
+                classObject2: function () {
+                    return {
+                        active: true,
+                        'text-danger': this.error.value && !this.isActive
+                    }
                 }
             }
+
         })
     </script>
 
