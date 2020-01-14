@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>watch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vm1">
+        <p style="font-size:25px;">num : {{counter}}</p>
+        <button @click="counter++" style="font-size:25px;">click me</button>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el: "#vm1",
+            data: {
+                counter: 1
+            }
+        });
+
+        vm1.$watch('counter', function (nval, oval) {
+            alert("the value :" + nval + "come from :" + oval)
+        })
+    </script>
+
+    <div id="computed_prop">
+        kilometers:<input type="text" v-model="kilometers">
+        meters:<input type="text" v-model="meters">
+    </div>
+    <p id="info"></p>
+    <script>
+        var vm = new Vue({
+            el: "#computed_prop",
+            data: {
+                kilometers: 0,
+                meters: 0
+            },
+            watch: {
+                kilometers: function (val) {
+                    this.kilometers = val;
+                    this.meters = val * 1000;
+                },
+                meters: function (val) {
+                    this.meters = val;
+                    this.kilometers = val / 1000
+                }
+            }
+        });
+        vm.$watch('kilometers', function (nVal, oVal) {
+            document.getElementById("info").innerHTML = "the value :" + nVal + "come from :" + oVal;
+        })
+    </script>
+</body>
+
+</html>

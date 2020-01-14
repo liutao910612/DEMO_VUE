@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--computed-->
+    <div id="vm1">
+        <p> original string : {{message}}</p>
+        <p> reverse string :{{reversedMessage}}</p>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el: "#vm1",
+            data: {
+                message: "hello world!"
+            },
+            computed: {
+                reversedMessage: function () {
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+
+    <!--methods-->
+    <div id="vm2">
+        <p> original string : {{message}}</p>
+        <p> reverse string :{{reversedMessage()}}</p>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#vm2",
+            data: {
+                message: "hello world!"
+            },
+            methods: {
+                reversedMessage: function () {
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+
+    <!--setter and getter-->
+    <div id="vm3">
+        <p>{{site}}</p>
+    </div>
+    <script>
+        var vm3 = new Vue({
+            el: "#vm3",
+            data: {
+                name: "Google",
+                url: "https://www/google.com"
+            },
+            computed: {
+                site: {
+                    get: function () {
+                        return this.name + ' ' + this.url
+                    },
+                    set: function (newValue) {
+                        this.name = newValue[0]
+                        this.url = newValue[1]
+                    }
+                }
+            }
+        });
+
+        vm3.site = ["baidu"," https://www.baidu.com"];
+        document.write('name:', vm3.name);
+        document.write('<br/>');
+        document.write('url:', vm3.url);
+    </script>
+
+    
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>command demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body class="native">
+    <div id="vm1">
+        <p v-if="greeting">hello</p>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el: "#vm1",
+            data: {
+                greeting: false
+            }
+        })
+    </script>
+
+    <div id="vm2">
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph1</p>
+            <p>Paragraph2</p>
+        </template>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#vm2",
+            data: {
+                ok: true
+            }
+        })
+    </script>
+
+    <div id="vm3" v-show="greeting">
+        Hello
+    </div>
+    <script>
+        var vm3 = new Vue({
+            el: "#vm3",
+            data: {
+                greeting: true
+            }
+        })
+    </script>
+
+    <div id="vm4">
+        <p v-if="ok">OK</p>
+        <p v-else="ok">NOT OK</p>
+    </div>
+    <script>
+        var vm4 = new Vue({
+            el: "#vm4",
+            data: {
+                ok: false
+            }
+        })
+    </script>
+
+    <!--5,v-model-->
+    <form id="vm5">
+        name:
+        <input type="text" v-model="data.name" placeholder="">
+        <br />
+        sex:
+        <input type="radio" id="man" value="One" v-model="data.sex">
+        <label for="man">man</label>
+        <input type="radio" id="famale" value="Two" v-model="data.sex">
+        <label for="famale">famale</label>
+        <br />
+        interest:
+        <input type="checkbox" id="book" value="book" v-model="data.interest">
+        <label for="book">book</label>
+        <input type="checkbox" id="swim" value="swim" v-model="data.interest">
+        <label for="swim">swim</label>
+        <input type="checkbox" id="game" value="game" v-model="data.interest">
+        <label for="game">game</label>
+        <br />
+        identity:
+        <select v-model="data.identity">
+            <option value="teacher" selected>teacher</option>
+            <output value="doctor">doctor</output>
+            <output value="lawyer">lawyer</output>
+        </select>
+
+    </form>
+    <script>
+        var vm5 = new Vue({
+            el: "#vm5",
+            data: {
+                data: {
+                    name: "",
+                    sex: "",
+                    interest: [],
+                    identity: ""
+                }
+            }
+        })
+    </script>
+    <!--5_1,lazy-->
+    <div id="vm5_1">
+        <input v-model="msg" lazy><br />
+        {{msg}}
+    </div>
+    <script>
+        var vm5_1 = new Vue({
+            el: "#vm5_1",
+            data: {
+                msg: "the content will change after changed"
+            }
+        })
+    </script>
+
+    <!--5_2,debounce-->
+    <div id="vm5_2">
+        <input v-model="msg" debounce="5000"><br />
+        {{msg}}
+    </div>
+    <script>
+        var vm6 = new Vue({
+            el: "#vm5_2",
+            data: {
+                msg: "the content will change after 5000 seconds"
+            }
+        })
+    </script>
+
+    <!--6_1,v-for-->
+    <ul id="vm6_1">
+        <li v-for="(item,index) in items">
+            {{index}} - {{item.msg}}
+        </li>
+    </ul>
+    <script>
+        var vm6_1 = new Vue({
+            el: "#vm6_1",
+            data: {
+                items: [{
+                        msg: "apple"
+                    },
+                    {
+                        msg: "orange"
+                    }
+                ]
+            }
+        })
+    </script>
+
+    <!--6_2,Iterative  object-->
+    <ul id="vm6_2">
+        <li v-for="(key,value) in object">
+            {{key}} :{{value}}
+        </li>
+    </ul>
+    <script>
+        var vm6_2 = new Vue({
+            el: "#vm6_2",
+            data: {
+                object: {
+                    name: "alvin",
+                    age: "28",
+                    interest: "basketball"
+                }
+
+            }
+        })
+    </script>
+
+    <!--6_3,Iterative integer-->
+    <ul id="vm6_3">
+        <li v-for="num in 10">
+            {{num}}
+        </li>
+    </ul>
+    <script>
+    var vm6_3 = new Vue({
+        el:"#vm6_3"
+    })
+    </script>
+
+</body>
+
+</html>
