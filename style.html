@@ -22,17 +22,24 @@
 
 <body>
     <div id="vm1">
-        <div v-bind:class="{active : isActive,'text-danger' : hasError}"></div>
+        <!-- <div v-bind:class="{active : isActive,'text-danger' : hasError}"></div> -->
+        <div v-bind:class="{classObject}"></div>
     </div>
     <script>
         var vm1 = new Vue({
             el: "#vm1",
             data: {
-                isActive: true,
-                hasError: true
+                // isActive: true,
+                // hasError: true,
+                classObject: {
+                    active: true,
+                    'text-danger': true
+                }
             }
         })
     </script>
+
+
 
 </body>
 
