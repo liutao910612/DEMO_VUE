@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>event handler</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vm1">
+        <button v-on:click="counter += 1">add 1</button>
+        <p>This button has been clicked {{ counter }} times</p>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el: "#vm1",
+            data: {
+                counter: 1
+            }
+        })
+    </script>
+
+    <!--we can bind function directly-->
+    <div id="vm2">
+
+        <!--the 'greet' function will be created -->
+        <button v-on:click="greet">Greet</button>
+        <br/>
+        <button v-on:click="say('what')">Say</button>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#vm2",
+            data: {
+                name: "Vue"
+            },
+            methods: {
+                greet: function (event) {
+                    alert('Hello ' + this.name)
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                },
+                say:function(message){
+                    alert(message)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

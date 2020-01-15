@@ -59,6 +59,45 @@
         })
     </script>
 
+    <!--数组语法-->
+    <br />
+    <div id="vm2">
+        <div v-bind:class="[activeClass,errorClass]"></div>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#vm2",
+            data: {
+                isError: true,
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        })
+    </script>
+
+    <!--内联样式-->
+    <div id="vm3">
+        <div v-bind:style="{color:activeColor, fontSize:fontSize + 'px'}">内联样式demo1</div>
+        <div v-bind:style="styleObject">内联样式demo2</div>
+        <div v-bind:style="[styleObject,overridingStyles]">内联样式demo3</div>
+    </div>
+    <script>
+        var vm3 = new Vue({
+            el:"#vm3",
+            data:{
+                activeColor:'green',
+                fontSize:15,
+                styleObject:{
+                    color:'blue',
+                    fontSize:20,
+                },
+                overridingStyles:{
+                    'font-weight':'bold'
+                }
+            }
+        })
+    </script>
+
 
 
 </body>
