@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<!--
+    you can implement two-way data binding by 'v-model'
+-->
+<body>
+    <div id="vm1">
+        <p>input:</p>
+        <input v-model="message" placeholder="edit me ...">
+        <p>the message is {{message}}</p>
+        
+        <p>textArea:</p>
+        <textarea v-model="message1" placeholder="textarea edit ..."></textarea>
+        <p style="white-space: pre;">{{message1}}</p>
+
+        <p>single checkbox：</p>
+        <input type="checkbox" v-model="checked" id="checkbox">
+        <label for="checkbox">{{ checked}}</label>
+
+        <p>multiple checkbox:</p>
+        <input type="checkbox" v-model="checkedNames" value="baskedball" id="baskedball">
+        <label for="basketball">basketball</label>
+        <input type="checkbox" v-model="checkedNames" value="football" id="football">
+        <label for="football">football</label>
+        <input type="checkbox" v-model="checkedNames" value="pingpong" id="pingpong">
+        <label for="pingpong">pingpong</label>
+        <br/>
+        <span> the checked names are :{{checkedNames}}</span>
+
+        <p>radio:</p>
+        <input type="radio" id="man" value="man" v-model="sex">
+        <label for="man">man</label>
+        <input type="radio" id="woman" value="woman" v-model="sex">
+        <label for="woman">woman</label>
+        <br/>
+        <p>sex:{{sex}}</p>
+
+        <p>select:</p>
+        <select v-model="interest" name="fruit">
+            <option value="">please choose a fruit</option>
+            <option value="orange">orange</option>
+            <option value="apple">apple</option>
+        </select>
+        <br/>
+        <p>the interesting fruit is :{{interest}}</p>
+    </div>
+    <script>
+        var vm1 = new Vue({
+            el:"#vm1",
+            data:{
+                message:"hello",
+                message1:"world",
+                checked:false,
+                checkedNames:[],
+                sex:'man',
+                interest:''
+            }
+        })
+    </script>
+</body>
+</html>
