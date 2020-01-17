@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="vm1">
+        <hello></hello>
+    </div>
+
+    <div id="vm2">
+        <child></child>
+    </div>
+
+    <div id="vm3">
+        <child3 message='Good job!'></child3>
+    </div>
+
+    <div id="vm4">
+        <input v-model="parentMsg">
+        <child4 v-bind:message="parentMsg"></child4>
+    </div>
+
+    <div id="vm41">
+        <todo-item v-for="item in sites" v-bind:todo='item'></todo-item>
+    </div>
+    
+    <div id="vm5">
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+
+</body>
+<script>
+    //全局组件
+    Vue.component('hello',{
+        template:'<h1>hello world !</h1>'
+    })
+    var vm1 = new Vue({
+        el:"#vm1"
+    })
+
+    //局部组件
+    var child = {
+        template:'<h1>hello child</h1>'
+    }
+    var vm2 = new Vue({
+        el:"#vm2",
+        components:{
+            'child':child
+        }
+    })
+
+    //Prop
+    var vm3 = new Vue({
+        el:"#vm3",
+        components:{
+            'child3':{
+                props:['message'],
+                template:'<h2>{{message}}</h2>'
+            }
+        }
+    })
+
+    /**
+    * 动态Prop
+    * 类似于用v-bind绑定HTML特定到一个表达式，也可以使用v-bind动态绑定props的值到
+    * 父组件的属性中，当父组件的属性改变，子组件也跟着变
+    */
+    var vm4 = new Vue({
+        el:"#vm4",
+        data:{
+            parentMsg:'parent content'
+        },
+        components:{
+            'child4':{
+                props:['message'],
+                template:'<h2>{{message}}</h2>'
+            }
+        }
+    })
+
+    var vm41 = new Vue({
+        el:"#vm41",
+        data:{
+            sites:[
+                {text:'JAVA'},
+                {text:'HTML'},
+                {text:'CSS'}
+            ]
+        },
+        components:{
+            'todo-item':{
+                props:['todo'],
+                template:'<li>{{todo.text}}</li>'
+            }
+        }
+    })
+
+    //Prop 验证
+
+    //自定义事件
+    Vue.component('button-counter',{
+        template:'<button v-on:click="incrementHandler">{{ counter }}</button>',
+        data:function(){
+            return {
+                counter : 0
+            }
+        },
+        methods: {
+            incrementHandler:function(){
+                this.counter += 1
+                this.$emit('increment')
+            }
+        },
+    })
+
+    new Vue({
+        el:"#vm5",
+        data:{
+            total:0
+        },
+        methods: {
+            incrementTotal : function(){
+                this.total += 1
+            }
+        },
+    })
+
+</script>
+</html>

@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="vm1">
+        <p style="color: aquamarine;">{{ info }}</p>
+    </div>
+</body>
+<script>
+    var vm1 = new Vue({
+        el:"#vm1",
+        data:function(){
+            return {
+                info:null
+            }
+        },
+        mounted() {
+            axios.get('https://www.baidu.com')
+            .then(res => {
+                this.info = res
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+    })
+</script>
+</html>
